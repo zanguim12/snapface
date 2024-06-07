@@ -1,0 +1,18 @@
+<div class="face-snap-card">
+  <!--<p>face-snap works!</p>-->
+  <h2>{{ facesnap.title | uppercase }}</h2>
+  @if (facesnap.location) {
+    <p>Localisation : {{ facesnap.location }}</p>
+  } @else {
+    <p>Localisation non spécifiée</p>
+  }
+  <img [src]="facesnap.imageurl " [alt]="facesnap.title">
+  <p>mis en le {{facesnap.createdat | date:'d MMMM YYYY, a HH:mm' }}</p>
+  <p>{{facesnap.description}}</p>
+  <button (click)="onSnap()">
+    {{textsnap}}🤌 {{facesnap.snaps}}
+  </button>
+  <h2>{{ facesnap.title | uppercase }}</h2>
+  <a routerLink="facesnaps">BACK</a>
+
+</div>
