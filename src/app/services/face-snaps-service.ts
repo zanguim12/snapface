@@ -15,14 +15,16 @@ export class FaceSnapsService {
       'Mon meilleur ami depuis tout petit !',
       'https://static.euronews.com/articles/stories/08/16/43/08/1200x675_cmsv2_bcb3be74-5111-51c6-ac7d-173ac98cec6e-8164308.jpg',
       new Date(),
-      0
+      0,
+      "1"
     ),
     new FaceSnap(
       'TonTon',
       'Mon meilleur ami depuis tout petit !',
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLbQ4ly8f_2duN_z6JTFvfCjetVmdHdgA4mg&s',
       new Date(),
-      6
+      6,
+      "2"
     ).withLocation('la montagne')
 ];
 

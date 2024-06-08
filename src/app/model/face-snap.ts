@@ -9,8 +9,10 @@ export class FaceSnap {
               public description: string,
               public imageurl: string,
               public createdat: Date,
-              public snaps: number) {
-                this.id = crypto.randomUUID().substring(0,10);
+              public snaps: number,
+              public ids: string) {
+                //this.id = crypto.randomUUID().substring(0,10);
+                this.id = ids;
               }
 
 
