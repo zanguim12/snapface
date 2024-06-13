@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
 import { FaceSnap } from '../model/face-snap';
 import { SnapType } from '../model/snap-type.type';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map,switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FaceSnapsService {
+
+  constructor(private http: HttpClient) {}
+
 
   private faceSnaps: FaceSnap[] = [
     // vos FaceSnap ici
@@ -28,19 +34,41 @@ export class FaceSnapsService {
     ).withLocation('la montagne')
 ];
 
-getFaceSnaps(): FaceSnap[] {
-  return [...this.faceSnaps];
+getFaceSnaps(): Observable<FaceSnap[]> {
+  return this.http.get<FaceSnap[]>('http://localhost:3000/facesnaps');
 }
-getFaceSnapById(faceSnapId: string): FaceSnap {
-  const foundFaceSnap = this.faceSnaps.find(faceSnap => faceSnap.id === faceSnapId);
-  if (!foundFaceSnap) {
-    throw new Error('FaceSnap not found!');
-  }
-  return foundFaceSnap;
+getFaceSnapById(faceSnapId: number): Observable<FaceSnap> {
+  return this.http.get<FaceSnap>(`http://localhost:3000/facesnaps/${faceSnapId}`);
 }
 
-snapFaceSnapById(faceSnapId: string, snapType: SnapType): void {
-  const faceSnap = this.getFaceSnapById(faceSnapId);
-  faceSnap.snap(snapType);
+snapFaceSnapById(faceSnapId: number, snapType: SnapType): Observable<FaceSnap> {
+  return this.getFaceSnapById(faceSnapId).pipe(
+    map(faceSnap => {
+      faceSnap.snap(snapType);
+      return faceSnap;
+    }),
+    switchMap(updatedFaceSnap =>
+      this.http.put<FaceSnap>(`http://localhost:3000/facesnaps/${faceSnapId}`, updatedFaceSnap)
+    )
+  );
 }
+
+addFaceSnap(formValue: { title: string, description: string, imageurl: string, location?: string }) {
+  const newFaceSnap = new FaceSnap(
+    formValue.title,
+    formValue.description,
+    formValue.imageurl,
+    new Date(),
+    0,
+    (this.faceSnaps.length + 1).toString() // ou utilisez une méthode pour générer un ID unique
+  );
+
+  if (formValue.location) {
+    newFaceSnap.withLocation(formValue.location);
+  }
+
+  this.faceSnaps.push(newFaceSnap);
+}
+
+
 }

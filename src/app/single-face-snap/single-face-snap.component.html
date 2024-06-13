@@ -1,4 +1,4 @@
-<div class="face-snap-card">
+<div class="face-snap-card" *ngIf="facesnap$ | async as facesnap" [ngClass]="{ snapped: textsnap === 'Oops, unSnap!' }">
   <!--<p>face-snap works!</p>-->
   <h2>{{ facesnap.title | uppercase }}</h2>
   @if (facesnap.location) {
