@@ -4,6 +4,7 @@ import { CommonModule, DatePipe, NgClass, NgStyle, UpperCasePipe } from '@angula
 import { FaceSnapsService } from '../services/face-snaps-service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-face-snap',
@@ -41,13 +42,17 @@ export class SingleFaceSnapComponent implements OnInit {
     this.facesnap$ = this.faceSnapsService.getFaceSnapById(facesnapId);
   }
 
-  onSnap(): void {
-    if (this.userHasSnapped) {
-      this.unSnap();
+  onSnap(faceSnapId: number) {
+    if (this.textsnap === 'Oh Snap!') {
+        this.facesnap$ = this.faceSnapsService.snapFaceSnapById(faceSnapId, 'snap').pipe(
+            tap(() => this.textsnap = 'Oops, unSnap!')
+        );
     } else {
-      this.snap();
+        this.facesnap$ = this.faceSnapsService.snapFaceSnapById(faceSnapId, 'unsnap').pipe(
+            tap(() => this.textsnap = 'Oh Snap!')
+        );
     }
-  }
+}
 
   unSnap(): void {
     const faceSnapId = +this.route.snapshot.params['id'];

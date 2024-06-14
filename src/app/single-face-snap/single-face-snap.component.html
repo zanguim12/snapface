@@ -9,8 +9,8 @@
   <img [src]="facesnap.imageurl " [alt]="facesnap.title">
   <p>mis en le {{facesnap.createdat | date:'d MMMM YYYY, a HH:mm' }}</p>
   <p>{{facesnap.description}}</p>
-  <button (click)="onSnap()">
-    {{textsnap}}🤌 {{facesnap.snaps}}
+  <button (click)="onSnap(facesnap.id)">
+    {{textsnap}}🤌 {{+facesnap.snaps}}
   </button>
   <h2>{{ facesnap.title | uppercase }}</h2>
   <a routerLink="facesnaps">BACK</a>
