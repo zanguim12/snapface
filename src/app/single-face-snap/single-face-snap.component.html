@@ -6,7 +6,7 @@
   } @else {
     <p>Localisation non spécifiée</p>
   }
-  <img [src]="facesnap.imageurl " [alt]="facesnap.title">
+  <img [src]="facesnap.imageUrl " [alt]="facesnap.title">
   <p>mis en le {{facesnap.createdat | date:'d MMMM YYYY, a HH:mm' }}</p>
   <p>{{facesnap.description}}</p>
   <button (click)="onSnap(facesnap.id)">
