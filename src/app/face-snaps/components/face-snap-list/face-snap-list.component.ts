@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FaceSnapComponent } from '../face-snap/face-snap.component';
-import { FaceSnap } from '../model/face-snap';
-import { FaceSnapsService } from '../services/face-snaps-service';
+import { FaceSnap } from '../../../core/model/face-snap';
+import { FaceSnapsService } from '../../../core/services/face-snaps-service';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 

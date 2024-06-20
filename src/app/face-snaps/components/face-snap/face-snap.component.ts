@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';  // Assurez-vous que `Input` est importé correctement
-import { FaceSnap } from '../model/face-snap';
+import { FaceSnap } from '../../../core/model/face-snap';
 import { CommonModule, DatePipe, NgClass, NgStyle, UpperCasePipe } from '@angular/common';
-import { FaceSnapsService } from '../services/face-snaps-service';
+import { FaceSnapsService } from '../../../core/services/face-snaps-service';
 import { Router } from '@angular/router';
 
 @Component({
